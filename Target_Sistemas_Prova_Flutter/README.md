@@ -15,3 +15,7 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 
 ## I started to plan the login page placing a Column, and inside this a Form with Text followed by TextFormField. After doing that, I repeated the process once again. Under this TextFormField I put an TextButton and finally a last Text at the bottom page.
 ## I made some customizations on its widgets to improve their appearance such as space between then with SizedBox, or using InputDecoration and ButtonStyle.
+
+# RegExp(r'^[a-zA-Z0-9]+$') 
+
+## Implementing some functionalities for login and password. I made a validation for password field about special characters.

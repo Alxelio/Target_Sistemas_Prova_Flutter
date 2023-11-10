@@ -22,6 +22,30 @@ class LoginPage extends StatelessWidget {
   TextEditingController usuarioController = TextEditingController(text: '',);
   TextEditingController senhaController = TextEditingController(text: '',);
 
+  void loginPressedSenha(BuildContext context){
+    if( !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senhaController.text ) ){
+      alertSenhaEspecial(context);
+      return;
+    }
+  }
+
+  void alertSenhaEspecial(BuildContext context){
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Erro de Validação !"),
+      content: Text("Caracteres Especiais não são aceitos na senha !"),
+      actions: [
+        TextButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          child: Text("Entendido"),
+        ),
+      ],
+    ),);
+  }
+
+
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -112,8 +136,14 @@ class LoginPage extends StatelessWidget {
                                       const Color(0xFF44BD6E),       //rgba(68,189,110,255) verde
                                     ),
                                   ),
-                                  onPressed: () {},
+                                  onPressed: (){
+                                    loginPressedSenha(context);
+                                  },
                                   child: const Text("Entrar", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
+
+
+
+
                                 ),
                               ),
                             ),
