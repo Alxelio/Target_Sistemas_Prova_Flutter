@@ -66,12 +66,25 @@ void alertUserIsEmpty(BuildContext context){
           child: Text("Entendido"),
         ),
       ],
-    ) );
+    ),
+    );
     return;
 }
 
 void alertPasswordIsEmpty(context){
-
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Erro de Validação !"),
+      content: Text("Campo da Senha está vazio, por favor preencha-o !"),
+      actions: [
+        TextButton(onPressed: (){
+          Navigator.pop(context);
+        },
+        child: Text("Entendido"),
+        ),
+      ],
+    ),
+    );
+    return;
   }
 
 

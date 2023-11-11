@@ -24,3 +24,9 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 
 ## I changed the name of loginPressedSenha function to loginPressed. I also changed the name of alertSenhaEspecial function to alertSpecialPassword.
 ## I made a check about User field. This field is not allowed to accept an empty value.
+
+# Password Field - Empty Values
+
+## I made a check about Password field. This field is not allowed to accep an empty value. 
+## This validation for empty values is one by one, and its direction is top-down, not both of them at the same time.
+
