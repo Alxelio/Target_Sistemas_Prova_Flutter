@@ -33,10 +33,15 @@ class LoginPage extends StatelessWidget {
       return;
     }
 
+    if( senhaController.text.length < 2 || senhaController.text.length > 20){
+      passwordCheckLength(context);
+    }
+
     if( !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senhaController.text ) ){
       alertSpecialPassword(context);
       return;
     }
+
   }
 
   void alertSpecialPassword(BuildContext context){
@@ -54,38 +59,55 @@ class LoginPage extends StatelessWidget {
     ),);
   }
 
-void alertUserIsEmpty(BuildContext context){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Erro de Validação !"),
-      content: Text("Campo do Usuário está vazio, por favor preencha-o !"),
-      actions: [
-        TextButton(
-          onPressed: (){
+  void alertUserIsEmpty(BuildContext context){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("Erro de Validação !"),
+        content: Text("Campo do Usuário está vazio, por favor preencha-o !"),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Entendido"),
+          ),
+        ],
+      ),
+      );
+      return;
+  }
+
+  void alertPasswordIsEmpty(context){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("Erro de Validação !"),
+        content: Text("Campo da Senha está vazio, por favor preencha-o !"),
+        actions: [
+          TextButton(onPressed: (){
             Navigator.pop(context);
           },
           child: Text("Entendido"),
-        ),
-      ],
-    ),
-    );
-    return;
-}
+          ),
+        ],
+      ),
+      );
+      return;
+    }
 
-void alertPasswordIsEmpty(context){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Erro de Validação !"),
-      content: Text("Campo da Senha está vazio, por favor preencha-o !"),
-      actions: [
-        TextButton(onPressed: (){
-          Navigator.pop(context);
-        },
-        child: Text("Entendido"),
-        ),
-      ],
-    ),
-    );
-    return;
-  }
+    void passwordCheckLength(BuildContext context){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("Erro de Validação !"),
+        content: Text("O número de caracteres no campo senha deve ser maior ou igual a 2 e menor ou igual a 20 !"),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Entendido"),
+          ),
+        ],
+      ),
+      );
+      return;
+    }
 
 
   @override

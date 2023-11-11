@@ -30,3 +30,6 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 ## I made a check about Password field. This field is not allowed to accep an empty value. 
 ## This validation for empty values is one by one, and its direction is top-down, not both of them at the same time.
 
+# Password Field - Length of Input
+
+## This validation is done for checking the length of input for password field. It is not allowed to get the length less than 2 characters and more than 20 characters at the same time.
