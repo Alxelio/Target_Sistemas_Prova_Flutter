@@ -22,14 +22,24 @@ class LoginPage extends StatelessWidget {
   TextEditingController usuarioController = TextEditingController(text: '',);
   TextEditingController senhaController = TextEditingController(text: '',);
 
-  void loginPressedSenha(BuildContext context){
+  void loginPressed(BuildContext context){
+    if( usuarioController.text.isEmpty ){
+      alertUserIsEmpty(context);
+      return;
+    }
+
+    if( senhaController.text.isEmpty ){
+      alertPasswordIsEmpty(context);
+      return;
+    }
+
     if( !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senhaController.text ) ){
-      alertSenhaEspecial(context);
+      alertSpecialPassword(context);
       return;
     }
   }
 
-  void alertSenhaEspecial(BuildContext context){
+  void alertSpecialPassword(BuildContext context){
     showDialog(context: context, builder: (context) => AlertDialog(
       title: Text("Erro de Validação !"),
       content: Text("Caracteres Especiais não são aceitos na senha !"),
@@ -44,6 +54,25 @@ class LoginPage extends StatelessWidget {
     ),);
   }
 
+void alertUserIsEmpty(BuildContext context){
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Erro de Validação !"),
+      content: Text("Campo do Usuário está vazio, por favor preencha-o !"),
+      actions: [
+        TextButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          child: Text("Entendido"),
+        ),
+      ],
+    ) );
+    return;
+}
+
+void alertPasswordIsEmpty(context){
+
+  }
 
 
   @override
@@ -137,7 +166,7 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: (){
-                                    loginPressedSenha(context);
+                                    loginPressed(context);
                                   },
                                   child: const Text("Entrar", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
 

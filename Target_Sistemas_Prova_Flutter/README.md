@@ -19,3 +19,8 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 # RegExp(r'^[a-zA-Z0-9]+$') 
 
 ## Implementing some functionalities for login and password. I made a validation for password field about special characters.
+
+# User Field - Empty Values
+
+## I changed the name of loginPressedSenha function to loginPressed. I also changed the name of alertSenhaEspecial function to alertSpecialPassword.
+## I made a check about User field. This field is not allowed to accept an empty value.
