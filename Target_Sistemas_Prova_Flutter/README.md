@@ -33,3 +33,8 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 # Password Field - Length of Input
 
 ## This validation is done for checking the length of input for password field. It is not allowed to get the length less than 2 characters and more than 20 characters at the same time.
+
+# User Field - Length of Input
+
+## This validation is done for checking the length of input for user field. It is not allowed to get the length more than 20 characters.
+

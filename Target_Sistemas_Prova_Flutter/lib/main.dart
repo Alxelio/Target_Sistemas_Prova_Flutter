@@ -35,6 +35,12 @@ class LoginPage extends StatelessWidget {
 
     if( senhaController.text.length < 2 || senhaController.text.length > 20){
       passwordCheckLength(context);
+      return;
+    }
+
+    if( usuarioController.text.length > 20){
+      userCheckLength(context);
+      return;
     }
 
     if( !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senhaController.text ) ){
@@ -96,6 +102,23 @@ class LoginPage extends StatelessWidget {
       showDialog(context: context, builder: (context) => AlertDialog(
         title: Text("Erro de Validação !"),
         content: Text("O número de caracteres no campo senha deve ser maior ou igual a 2 e menor ou igual a 20 !"),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Entendido"),
+          ),
+        ],
+      ),
+      );
+      return;
+    }
+
+    void userCheckLength(context){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("Erro de Validação !"),
+        content: Text("O número de caracteres no campo usuário deve ser menor ou igual a 20 !"),
         actions: [
           TextButton(
             onPressed: (){
