@@ -38,3 +38,6 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 
 ## This validation is done for checking the length of input for user field. It is not allowed to get the length more than 20 characters.
 
+# Empty Spaces - User field
+
+## I made a validation about ending with empty spaces in the User field.

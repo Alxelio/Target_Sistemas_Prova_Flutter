@@ -23,6 +23,10 @@ class LoginPage extends StatelessWidget {
   TextEditingController senhaController = TextEditingController(text: '',);
 
   void loginPressed(BuildContext context){
+    if( usuarioController.text.endsWith(" ") ){
+      userFinalSpace(context);
+    }
+
     if( usuarioController.text.isEmpty ){
       alertUserIsEmpty(context);
       return;
@@ -119,6 +123,23 @@ class LoginPage extends StatelessWidget {
       showDialog(context: context, builder: (context) => AlertDialog(
         title: Text("Erro de Validação !"),
         content: Text("O número de caracteres no campo usuário deve ser menor ou igual a 20 !"),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Entendido"),
+          ),
+        ],
+      ),
+      );
+      return;
+    }
+
+    void userFinalSpace(BuildContext context){
+      showDialog(context: context, builder: (content) => AlertDialog(
+        title: Text("Erro de validação !"),
+        content: Text("O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final."),
         actions: [
           TextButton(
             onPressed: (){
