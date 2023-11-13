@@ -18,13 +18,16 @@ class MyApp extends StatelessWidget {
 
 
 class LoginPage extends StatelessWidget {
-  //const LoginPage({super.key});
   TextEditingController usuarioController = TextEditingController(text: '',);
   TextEditingController senhaController = TextEditingController(text: '',);
 
   void loginPressed(BuildContext context){
     if( usuarioController.text.endsWith(" ") ){
       userFinalSpace(context);
+    }
+
+    if( senhaController.text.endsWith(" ") ){
+      passwordFinalSpaces(context);
     }
 
     if( usuarioController.text.isEmpty ){
@@ -57,7 +60,7 @@ class LoginPage extends StatelessWidget {
   void alertSpecialPassword(BuildContext context){
     showDialog(context: context, builder: (context) => AlertDialog(
       title: Text("Erro de Validação !"),
-      content: Text("Caracteres Especiais não são aceitos na senha !"),
+      content: Text("Caracteres especiais não são aceitos na senha !"),
       actions: [
         TextButton(
           onPressed: (){
@@ -72,7 +75,7 @@ class LoginPage extends StatelessWidget {
   void alertUserIsEmpty(BuildContext context){
       showDialog(context: context, builder: (context) => AlertDialog(
         title: Text("Erro de Validação !"),
-        content: Text("Campo do Usuário está vazio, por favor preencha-o !"),
+        content: Text("Campo do usuário está vazio, por favor preencha-o !"),
         actions: [
           TextButton(
             onPressed: (){
@@ -89,7 +92,7 @@ class LoginPage extends StatelessWidget {
   void alertPasswordIsEmpty(context){
       showDialog(context: context, builder: (context) => AlertDialog(
         title: Text("Erro de Validação !"),
-        content: Text("Campo da Senha está vazio, por favor preencha-o !"),
+        content: Text("Campo da senha está vazio, por favor preencha-o !"),
         actions: [
           TextButton(onPressed: (){
             Navigator.pop(context);
@@ -139,6 +142,23 @@ class LoginPage extends StatelessWidget {
     void userFinalSpace(BuildContext context){
       showDialog(context: context, builder: (content) => AlertDialog(
         title: Text("Erro de validação !"),
+        content: Text("O campo usuário não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final."),
+        actions: [
+          TextButton(
+            onPressed: (){
+              Navigator.pop(context);
+            },
+            child: Text("Entendido"),
+          ),
+        ],
+      ),
+      );
+      return;
+    }
+
+    void passwordFinalSpaces(BuildContext context){
+      showDialog(context: context, builder: (context) => AlertDialog(
+        title: Text("Erro de Validação !"),
         content: Text("O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final."),
         actions: [
           TextButton(
@@ -152,6 +172,7 @@ class LoginPage extends StatelessWidget {
       );
       return;
     }
+
 
 
   @override

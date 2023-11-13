@@ -41,3 +41,7 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 # Empty Spaces - User field
 
 ## I made a validation about ending with empty spaces in the User field.
+
+# Empty Spaces - Password field
+
+## I made a validation about ending with empty spaces in the Password field.
