@@ -4,6 +4,36 @@ void main(){
   runApp(MyApp(),);
 }
 
+class MockAPI{
+  static Future<bool> validate_Credentials(String usuario, String senha) async {
+    await Future.delayed(Duration(milliseconds: 300),);
+
+    if( usuario == "Target" && senha == "Sistemas") return true;
+    else return false;
+  }
+}
+
+class NextScreen extends StatefulWidget {
+  @override
+  State<NextScreen> createState() => _NextScreenState();
+}
+
+class _NextScreenState extends State<NextScreen> {
+  @override
+  Widget build(BuildContext context) {
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: Text("New Page"),
+        ),
+      ),
+    );
+  }
+}
+
+
+
+
 class MyApp extends StatelessWidget {
   //const MyApp({super.key});
 
@@ -21,13 +51,15 @@ class LoginPage extends StatelessWidget {
   TextEditingController usuarioController = TextEditingController(text: '',);
   TextEditingController senhaController = TextEditingController(text: '',);
 
-  void loginPressed(BuildContext context){
+  void loginPressed(BuildContext context) async {
     if( usuarioController.text.endsWith(" ") ){
       userFinalSpace(context);
+      return;
     }
 
     if( senhaController.text.endsWith(" ") ){
       passwordFinalSpaces(context);
+      return;
     }
 
     if( usuarioController.text.isEmpty ){
@@ -55,6 +87,15 @@ class LoginPage extends StatelessWidget {
       return;
     }
 
+    bool return200 = await MockAPI.validate_Credentials(usuarioController.text, senhaController.text);
+
+    if( return200 == true ){
+      Navigator.push(context, MaterialPageRoute(builder: (context) => NextScreen(),),);
+    } else {
+      newPageFailed(context);
+      return;
+    }
+
   }
 
   void alertSpecialPassword(BuildContext context){
@@ -69,7 +110,9 @@ class LoginPage extends StatelessWidget {
           child: Text("Entendido"),
         ),
       ],
-    ),);
+    ),
+    );
+    return;
   }
 
   void alertUserIsEmpty(BuildContext context){
@@ -173,6 +216,22 @@ class LoginPage extends StatelessWidget {
       return;
     }
 
+  void newPageFailed(context){
+    showDialog(context: context, builder: (context) => AlertDialog(
+      title: Text("Erro de Validação !"),
+      content: Text("Ops! Usuário ou senha não conferem. Por favor insira as informações corretas !"),
+      actions: [
+        TextButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          child: Text("Entendido"),
+        ),
+      ],
+    ),
+    );
+    return;
+  }
 
 
   @override
@@ -269,10 +328,6 @@ class LoginPage extends StatelessWidget {
                                     loginPressed(context);
                                   },
                                   child: const Text("Entrar", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
-
-
-
-
                                 ),
                               ),
                             ),
@@ -301,3 +356,4 @@ class LoginPage extends StatelessWidget {
     );
   }
 }
+
