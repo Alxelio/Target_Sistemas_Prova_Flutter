@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher_string.dart';
 
 void main(){
   runApp(MyApp(),);
@@ -233,6 +234,10 @@ class LoginPage extends StatelessWidget {
     return;
   }
 
+  Future<void> urlLink(String url) async {
+    await canLaunchUrlString(url) ? await launchUrlString(url) :  throw "It is now allowed to open $url";
+  }
+
 
   @override
   Widget build(BuildContext context) {
@@ -256,7 +261,6 @@ class LoginPage extends StatelessWidget {
                 children: [
                   Container(
                     height: 110,
-                    //color: Colors.green,
                   ),
                   Container(
                     //color: Colors.yellow,
@@ -337,13 +341,17 @@ class LoginPage extends StatelessWidget {
                     ),
                   ),
                   Container(
-                    //color: Colors.deepOrange,
                     height: 110,
                     width: double.infinity,
                     child: Column(
-                      children: const [
+                      children: [
                         SizedBox(height: 40,),
-                        Text("Política de Privacidade", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.white),),
+                        GestureDetector(
+                          onTap: (){
+                            urlLink("https://www.google.com.br");
+                          },
+                          child: Text("Política de Privacidade", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.white),),
+                        ),
                       ],
                     ),
                   ),

@@ -49,3 +49,11 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 # New Page - Mock API Validation
 
 ## I added a Mock API Validation for user and password - I assigned "Target" for user field and "Sistemas" for password to navigate to the new page. 
+
+# Launcher  - Android Manifest.xml - Google website
+
+## I improved our version for compileSdkVersion 33 command and the path for reach this is: android/app/build.gradle
+## I needed to change some permissions on Android Manifest. The path for reach this is: android/app/src/main/AndroidManifest.xml
+## The command is:  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" /> 
+## I should type this command above inside the Tag <manifest xmlns:android="http://schemas.android.com/apk/res/android" ... /> at any place.
+## At pubspec.yaml I needed to place this command at - dependencies: url_launcher: ^6.1.8

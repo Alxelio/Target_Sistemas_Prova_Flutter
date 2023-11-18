@@ -1,5 +1,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="br.com.estevesalxelio.projeto_flutter_target_sistemas">
+
+    <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" />
+
    <application
         android:label="projeto_flutter_target_sistemas"
         android:name="${applicationName}"
