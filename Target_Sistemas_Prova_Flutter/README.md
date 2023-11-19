@@ -57,3 +57,9 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 ## The command is:  <uses-permission android:name="android.permission.QUERY_ALL_PACKAGES" /> 
 ## I should type this command above inside the Tag <manifest xmlns:android="http://schemas.android.com/apk/res/android" ... /> at any place.
 ## At pubspec.yaml I needed to place this command at - dependencies: url_launcher: ^6.1.8
+
+# Refactoring the code
+
+## I changed all the calling Dialog and Alert functions to have only one, because I intended to avoid the repetitions. 
+## So I introduced a specific String parameter in every calling functions to solve it.
+

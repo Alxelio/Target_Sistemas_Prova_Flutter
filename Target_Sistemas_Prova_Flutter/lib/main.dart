@@ -32,12 +32,7 @@ class _NextScreenState extends State<NextScreen> {
   }
 }
 
-
-
-
 class MyApp extends StatelessWidget {
-  //const MyApp({super.key});
-
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -51,40 +46,41 @@ class MyApp extends StatelessWidget {
 class LoginPage extends StatelessWidget {
   TextEditingController usuarioController = TextEditingController(text: '',);
   TextEditingController senhaController = TextEditingController(text: '',);
+  String message = "";
 
   void loginPressed(BuildContext context) async {
     if( usuarioController.text.endsWith(" ") ){
-      userFinalSpace(context);
+      displayMessage(context, "O campo usuário não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.");
       return;
     }
 
     if( senhaController.text.endsWith(" ") ){
-      passwordFinalSpaces(context);
+      displayMessage(context, "O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.");
       return;
     }
 
     if( usuarioController.text.isEmpty ){
-      alertUserIsEmpty(context);
+      displayMessage(context, "Campo do usuário está vazio, por favor preencha-o !");
       return;
     }
 
     if( senhaController.text.isEmpty ){
-      alertPasswordIsEmpty(context);
+      displayMessage(context, "Campo da senha está vazio, por favor preencha-o !");
       return;
     }
 
     if( senhaController.text.length < 2 || senhaController.text.length > 20){
-      passwordCheckLength(context);
+      displayMessage(context, "O número de caracteres no campo senha deve ser maior ou igual a 2 e menor ou igual a 20 !");
       return;
     }
 
     if( usuarioController.text.length > 20){
-      userCheckLength(context);
+      displayMessage(context, "O número de caracteres no campo usuário deve ser menor ou igual a 20 !");
       return;
     }
 
     if( !RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senhaController.text ) ){
-      alertSpecialPassword(context);
+      displayMessage(context, "Caracteres especiais não são aceitos na senha !");
       return;
     }
 
@@ -93,134 +89,16 @@ class LoginPage extends StatelessWidget {
     if( return200 == true ){
       Navigator.push(context, MaterialPageRoute(builder: (context) => NextScreen(),),);
     } else {
-      newPageFailed(context);
+      displayMessage(context, "Ops! Usuário ou senha não conferem. Por favor insira as informações corretas !");
       return;
     }
 
   }
 
-  void alertSpecialPassword(BuildContext context){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Erro de Validação !"),
-      content: Text("Caracteres especiais não são aceitos na senha !"),
-      actions: [
-        TextButton(
-          onPressed: (){
-            Navigator.pop(context);
-          },
-          child: Text("Entendido"),
-        ),
-      ],
-    ),
-    );
-    return;
-  }
-
-  void alertUserIsEmpty(BuildContext context){
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text("Erro de Validação !"),
-        content: Text("Campo do usuário está vazio, por favor preencha-o !"),
-        actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-  }
-
-  void alertPasswordIsEmpty(context){
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text("Erro de Validação !"),
-        content: Text("Campo da senha está vazio, por favor preencha-o !"),
-        actions: [
-          TextButton(onPressed: (){
-            Navigator.pop(context);
-          },
-          child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-    }
-
-    void passwordCheckLength(BuildContext context){
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text("Erro de Validação !"),
-        content: Text("O número de caracteres no campo senha deve ser maior ou igual a 2 e menor ou igual a 20 !"),
-        actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-    }
-
-    void userCheckLength(context){
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text("Erro de Validação !"),
-        content: Text("O número de caracteres no campo usuário deve ser menor ou igual a 20 !"),
-        actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-    }
-
-    void userFinalSpace(BuildContext context){
-      showDialog(context: context, builder: (content) => AlertDialog(
-        title: Text("Erro de validação !"),
-        content: Text("O campo usuário não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final."),
-        actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-    }
-
-    void passwordFinalSpaces(BuildContext context){
-      showDialog(context: context, builder: (context) => AlertDialog(
-        title: Text("Erro de Validação !"),
-        content: Text("O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final."),
-        actions: [
-          TextButton(
-            onPressed: (){
-              Navigator.pop(context);
-            },
-            child: Text("Entendido"),
-          ),
-        ],
-      ),
-      );
-      return;
-    }
-
-  void newPageFailed(context){
-    showDialog(context: context, builder: (context) => AlertDialog(
-      title: Text("Erro de Validação !"),
-      content: Text("Ops! Usuário ou senha não conferem. Por favor insira as informações corretas !"),
+  void displayMessage(BuildContext context, message){
+    showDialog(context: context, builder: (content) => AlertDialog(
+      title: Text("Erro de validação !"),
+      content: Text(message),
       actions: [
         TextButton(
           onPressed: (){
@@ -345,12 +223,12 @@ class LoginPage extends StatelessWidget {
                     width: double.infinity,
                     child: Column(
                       children: [
-                        SizedBox(height: 40,),
+                        const SizedBox(height: 40,),
                         GestureDetector(
                           onTap: (){
                             urlLink("https://www.google.com.br");
                           },
-                          child: Text("Política de Privacidade", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.white),),
+                          child: const Text("Política de Privacidade", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 15, color: Colors.white),),
                         ),
                       ],
                     ),
