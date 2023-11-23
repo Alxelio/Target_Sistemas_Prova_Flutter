@@ -63,3 +63,6 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 ## I changed all the calling Dialog and Alert functions to have only one, because I intended to avoid the repetitions. 
 ## So I introduced a specific String parameter in every calling functions to solve it.
 
+# DDD Domain-Driven Design Principles - Componentization 
+
+## I did my best to reach Domain-Driven Design Principles, with that said, I think it is like people and books usually say: "Understanding is a piece of a cake but doing, it is a hard task".
