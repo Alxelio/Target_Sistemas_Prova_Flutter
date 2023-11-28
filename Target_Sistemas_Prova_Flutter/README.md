@@ -66,3 +66,15 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 # DDD Domain-Driven Design Principles - Componentization 
 
 ## I did my best to reach Domain-Driven Design Principles, with that said, I think it is like people and books usually say: "Understanding is a piece of a cake but doing, it is a hard task".
+
+# Tests for Validation
+
+## I used the default test packages for Flutter in the pubspec.yaml file
+## dev_dependencies:
+##   flutter_test: 
+##   sdk:flutter
+## I had some difficulties about the BuildContext context parameter which I used to pass previously in this code, because in tests we do not usually use the current context in tests, but our inputs as we own wish.
+## So I had to be careful about '?' operator to assign the variable which can be optional and '!' operator to assign to the context that really exists like in Navigator.push(context!).
+## After that I started to approach some application tests and I had to change the scope and the signature of function.
+## When I was doing theses tests, I tried to apply the TDD and SOLID Principles as much as I could. 
+

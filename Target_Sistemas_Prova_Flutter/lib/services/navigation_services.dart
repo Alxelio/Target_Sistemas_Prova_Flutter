@@ -21,12 +21,8 @@ class _NextScreenState extends State<NextScreen> {
 
 } /* Services - Navigation Services */
 
-
-
-
 /* Services - Navigation Services */
 Future<void> urlLink(String url) async {
   await canLaunchUrlString(url) ? await launchUrlString(url) :  throw "It is now allowed to open $url";
 } /* Services - Navigation Services */
-
 

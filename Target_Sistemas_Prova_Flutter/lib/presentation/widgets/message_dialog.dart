@@ -1,20 +1,25 @@
 /* Presentation - Widgets - Message */
 import 'package:flutter/material.dart';
 
-void displayMessage(BuildContext context, message){
+
+class MessageDialog {
+
+  void displayMessage(BuildContext context, String message){
     showDialog(context: context, builder: (content) => AlertDialog(
-      title: Text("Erro de validação !"),
+      title: const Text("Erro de validação !"),
       content: Text(message),
       actions: [
         TextButton(
           onPressed: (){
             Navigator.pop(context);
           },
-          child: Text("Entendido"),
+          child: const Text("Entendido"),
         ),
       ],
     ),
     );
     return;
   } /* Presentation - Widgets - Message */
+
+}
 

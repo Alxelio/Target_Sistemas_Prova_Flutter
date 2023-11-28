@@ -26,4 +26,3 @@ class MyApp extends StatelessWidget {
     );
   }
 } /* Main.dart */
-
