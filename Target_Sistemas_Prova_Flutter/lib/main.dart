@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_flutter_target_sistemas/entities/credentials.dart';
-import 'presentation/pages/login_page.dart';
+import 'package:projeto_flutter_target_sistemas/presentation/pages/login_page.dart';
 
 /* Main.dart */
 void main(){
@@ -11,6 +11,7 @@ void main(){
   );
 
   runApp(MyApp(credentials),);
+  //runApp(MyApp2());
 } /* Main.dart */
 
 /* Main.dart */
@@ -23,6 +24,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: LoginPage(credentials),
+      //home: MyApp2(),
     );
   }
 } /* Main.dart */
+
+

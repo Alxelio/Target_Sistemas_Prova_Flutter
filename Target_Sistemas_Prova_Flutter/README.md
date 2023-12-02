@@ -78,3 +78,32 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 ## After that I started to approach some application tests and I had to change the scope and the signature of function.
 ## When I was doing theses tests, I tried to apply the TDD and SOLID Principles as much as I could. 
 
+# MobX
+
+## First of all, I should put the dependencies packages in pubspec.yaml file
+## dependencies: 
+##  mobx: ^2.2.1
+##  flutter_mobx: ^2.2.0
+## 
+## dev_dependencies:
+##  mobx_codegen: ^2.4.0
+##  build_runner: ^2.4.7
+##
+## By doing this our code is capable to generate and run the state of its using Mobx.
+## I should place this command on the top of file '  import 'package:mobx/mobx.dart';  ' and '  import 'package:flutter_mobx/flutter_mobx.dart';  '
+## I should write this command as well  '  part'file_name.g.dart;'  '
+## After all of that I should run this command in the terminal: flutter packages pub run build_runner watch
+## I must change this file to: 
+##
+## environment:
+##  sdk: ">=3.0.0 <4.0.0"
+##
+## Because it was outdated and then I rode: flutter upgrade in the terminal to solve it.
+## Set up this command: dart run build_runner watch      placing deprecated     flutter packages pub run build_runner watch
+## I had to update flutter_lints: ^1.0.0 to a newer version like flutter_lints: ^3.0.1
+## dev_dependencies:
+##  flutter_lints: ^3.0.1
+## At the ~android/gradle.properties file I must put this to Java 9 or newer: org.gradle.jvmargs=-Xmx1536M --add-exports=java.base/sun.nio.ch=ALL-UNNAMED --add-opens=java.base/java.lang=ALL-UNNAMED --add-opens=java.base/java.lang.reflect=ALL-UNNAMED --add-opens=java.base/java.io=ALL-UNNAMED --add-exports=jdk.unsupported/sun.misc=ALL-UNNAMED
+## At the ~android/build.gradle file I must update it from ext.kotlin_version = '1.6.10' to ext.kotlin_version = '1.8.10'
+## I had had some troubles about kotlin and java versions, so I have changed them to fit my project as you can see above.
+
