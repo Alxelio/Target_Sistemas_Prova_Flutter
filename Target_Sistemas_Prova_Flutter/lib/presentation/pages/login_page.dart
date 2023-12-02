@@ -42,7 +42,7 @@ class LoginPage extends StatelessWidget {
                             const Text("  Usuário", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
                             const SizedBox(height: 10,),
                             TextFormField(
-                              controller: credentials.usuarioController,
+                              controller: credentials.userController,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -63,7 +63,7 @@ class LoginPage extends StatelessWidget {
                             const Text("  Senha", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
                             const SizedBox(height: 10,),
                             TextFormField(
-                              controller: credentials.senhaController,
+                              controller: credentials.passwordController,
                               decoration: InputDecoration(
                                 fillColor: Colors.white,
                                 filled: true,
@@ -97,7 +97,7 @@ class LoginPage extends StatelessWidget {
                                     ),
                                   ),
                                   onPressed: (){
-                                    loginPressed(context, credentials.usuarioController, credentials.senhaController, credentials.message);
+                                    loginPressed(context, credentials.userController, credentials.passwordController, credentials.message);
                                   },
                                   child: const Text("Entrar", style: TextStyle(fontWeight: FontWeight.normal, fontSize: 18, color: Colors.white),),
                                 ),

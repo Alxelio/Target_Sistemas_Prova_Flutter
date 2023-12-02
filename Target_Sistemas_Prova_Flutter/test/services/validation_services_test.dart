@@ -2,56 +2,56 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:projeto_flutter_target_sistemas/entities/credentials.dart';
 
 class ValidationServices {
-  userFieldEndsEmpty(String? usuario, String? senha) {
-    if (usuario!.endsWith(" ")) {
+  userFieldEndsEmpty(String? user, String? password) {
+    if (user!.endsWith(" ")) {
       return 'O campo usuário não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.';
     }
   }
 
 
 
-  passwordFieldEndsEmpty(String? usuario, String? senha) {
-    if (senha!.endsWith(" ")) {
+  passwordFieldEndsEmpty(String? user, String? password) {
+    if (password!.endsWith(" ")) {
       return 'O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.';
     }
   }
 
 
 
-  userFieldIsEmpty(String? usuario, String? senha) {
-    if (usuario!.isEmpty) {
+  userFieldIsEmpty(String? user, String? password) {
+    if (user!.isEmpty) {
       return 'Campo do usuário está vazio, por favor preencha-o !';
     }
   }
 
 
 
-  passwordFieldIsEmpty(String? usuario, String? senha) {
-    if (senha!.isEmpty) {
+  passwordFieldIsEmpty(String? user, String? password) {
+    if (password!.isEmpty) {
       return 'Campo da senha está vazio, por favor preencha-o !';
     }
   }
 
 
 
-  passwordNumberCharacteres(String? usuario, String? senha) {
-    if (senha!.length < 2 || senha.length > 20) {
+  passwordNumberCharacteres(String? user, String? password) {
+    if (password!.length < 2 || password.length > 20) {
       return 'O número de caracteres no campo senha deve ser maior ou igual a 2 e menor ou igual a 20 !';
     }
   }
 
 
 
-  userNumberCharacteres(String? usuario, String? senha) {
-    if (usuario!.length > 20) {
+  userNumberCharacteres(String? user, String? password) {
+    if (user!.length > 20) {
       return 'O número de caracteres no campo usuário deve ser menor ou igual a 20 !';
     }
   }
 
 
 
-  passwordSpecialCharacteres(String? usuario, String? senha) {
-    if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(senha!)) {
+  passwordSpecialCharacteres(String? user, String? password) {
+    if (!RegExp(r'^[a-zA-Z0-9]+$').hasMatch(password!)) {
       return 'Caracteres especiais não são aceitos na senha !';
     }
   }

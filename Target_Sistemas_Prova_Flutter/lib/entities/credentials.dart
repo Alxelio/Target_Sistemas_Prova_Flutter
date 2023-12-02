@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
 class Credentials {
-  final TextEditingController usuarioController;
-  final TextEditingController senhaController;
+  final TextEditingController userController;
+  final TextEditingController passwordController;
   final String message;
 
-  Credentials(this.usuarioController, this.senhaController, this.message);
+  Credentials(this.userController, this.passwordController, this.message);
 }
 

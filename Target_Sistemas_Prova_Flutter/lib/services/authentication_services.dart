@@ -1,9 +1,9 @@
 /* Services - Authentication Services */
 class MockAPI{
-  static Future<bool> validate_Credentials(String usuario, String senha) async {
+  static Future<bool> validate_Credentials(String user, String password) async {
     await Future.delayed(Duration(milliseconds: 300),);
 
-    if( usuario == "Target" && senha == "Sistemas") return true;
+    if( user == "Target" && password == "Sistemas") return true;
     else return false;
   }
 } /* Services - Authentication Services */

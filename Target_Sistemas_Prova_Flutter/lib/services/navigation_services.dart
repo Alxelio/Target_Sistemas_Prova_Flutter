@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:projeto_flutter_target_sistemas/services/mob_x.dart';
 import 'package:url_launcher/url_launcher_string.dart';
-import 'package:flutter_mobx/flutter_mobx.dart';
 
 class NextScreen extends StatefulWidget {
   @override
