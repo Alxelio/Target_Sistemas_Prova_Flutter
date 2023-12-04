@@ -1,4 +1,3 @@
-/* Services - Validation Services */
 import 'package:flutter/material.dart';
 import 'package:projeto_flutter_target_sistemas/presentation/widgets/message_dialog.dart';
 import 'package:projeto_flutter_target_sistemas/services/authentication_services.dart';
@@ -6,18 +5,26 @@ import 'package:projeto_flutter_target_sistemas/services/navigation_services.dar
 
 void userFieldEndsEmpty(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message){
   MessageDialog messageDialog = MessageDialog();
-  if( userController.text.endsWith(" ") ){
-    messageDialog.displayMessage(context, "O campo usuário não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.");
-    return;
+  if( userController.text.endsWith(" ") ) {
+    messageDialog.displayMessage(context, "O campo usuário não pode terminar com espaços vazios ! Retirei os espaços vazios do final. Aperte Enter novamente por favor.");
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      userController.text = userController.text.trim();
+    });
   }
+  return;
 }
 
 void passwordFieldEndsEmpty(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message){
   MessageDialog messageDialog = MessageDialog();
   if( passwordController.text.endsWith(" ") ){
-    messageDialog.displayMessage(context, "O campo senha não pode terminar com espaços vazios ! Retire por favor o espaço vazio do final.");
-    return;
+    messageDialog.displayMessage(context, "O campo senha não pode terminar com espaços vazios ! Retirei os espaços vazios do final. Aperte Enter novamente por favor.");
+
+    Future.delayed(const Duration(seconds: 3), () async {
+      passwordController.text = passwordController.text.trim();
+    });
   }
+  return;
 }
 
 void userFieldIsEmpty(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message){
@@ -60,8 +67,7 @@ void passwordSpecialCharacteres(BuildContext context, TextEditingController user
   }
 }
 
-
-void MockAPIFake(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message) async {
+void mockApiFake(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message) async {
   MessageDialog messageDialog = MessageDialog();
   bool return200 = await MockAPI.validate_Credentials(userController.text, passwordController.text);
 
@@ -70,10 +76,9 @@ void MockAPIFake(BuildContext context, TextEditingController userController, Tex
   } else {
     messageDialog.displayMessage(context, "Ops! Usuário ou senha não conferem. Por favor insira as informações corretas !");
     return;
-  } /* Services - Validation Services */
+  }
 
 }
-
 
 void loginPressed(BuildContext context, TextEditingController userController, TextEditingController passwordController, String message) {
 
@@ -91,7 +96,7 @@ void loginPressed(BuildContext context, TextEditingController userController, Te
 
   passwordSpecialCharacteres(context, userController, passwordController, message);
 
-  MockAPIFake(context, userController, passwordController, message);
+  mockApiFake(context, userController, passwordController, message);
 
 }
 

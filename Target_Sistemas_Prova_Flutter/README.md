@@ -107,3 +107,10 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 ## At the ~android/build.gradle file I must update it from ext.kotlin_version = '1.6.10' to ext.kotlin_version = '1.8.10'
 ## I had had some troubles about kotlin and java versions, so I have changed them to fit my project as you can see above.
 
+# Shared Preferences
+
+## dependencies:
+##  shared_preferences: ^2.0.0
+
+
+

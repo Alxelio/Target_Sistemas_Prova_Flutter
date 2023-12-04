@@ -37,6 +37,7 @@ dependencies:
   url_launcher: ^6.1.8
   mobx: ^2.2.1
   flutter_mobx: ^2.2.0
+  path_provider: ^2.1.1
 
 dev_dependencies:
   flutter_test:
