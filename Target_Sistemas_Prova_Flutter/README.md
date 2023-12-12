@@ -111,6 +111,10 @@ flutter create --project-name projeto_flutter_target_sistemas --platforms androi
 
 ## I wrapped the whole screen with GestureDetector to place focus on the typing field. I instantiated a variable with FocusNode type and then I called it inside the TextFormField field.
 
+# Add, Delete and Update Functions 
+
+## I made add, delete and update functions by this time. I changed a little bit the update functions to follow the business rules.
+
 # Shared Preferences
 
 ## dependencies:

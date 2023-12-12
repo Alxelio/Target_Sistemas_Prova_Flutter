@@ -12,182 +12,225 @@ class NextScreen extends StatefulWidget {
 
 class _NextScreenState extends State<NextScreen> {
   final NextScreenStore store = NextScreenStore();
-  final TextEditingController textController = TextEditingController();
+  final TextEditingController textController1 = TextEditingController();
   final FocusNode focus = FocusNode();
+
+  Future<void> showEditConfirmDialog(index, text) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Digite um novo texto"),
+            content: TextFormField(
+              controller: textController1,
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Cancelar"),
+              ),
+              TextButton(
+                onPressed: () {
+                  store.updateCard(index, textController1.text);
+                  textController1.clear();
+                  Navigator.of(context).pop();
+                },
+                child: const Text("Alterar"),
+              ),
+            ],
+          );
+        });
+  }
+
+  Future<void> showDeleteConfirmDialog(index) async {
+    return showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: const Text("Confirmar Exclusão"),
+            content: const Text("Deletar"),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.of(context).pop(),
+                child: const Text("Cancelar"),
+              ),
+              TextButton(
+                onPressed: () {
+                  store.removeCard(index);
+                  Navigator.of(context).pop();
+                },
+                child: const Text('Excluir'),
+              ),
+            ],
+          );
+        });
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
         body: GestureDetector(
-          onTap: (){
+          onTap: () {
             FocusScope.of(context).requestFocus(focus);
           },
           child: Container(
-            width: double.infinity,
+            //Geral
+            height: double.infinity,
             decoration: const BoxDecoration(
               gradient: LinearGradient(
                 colors: [
                   Color(0xFF1F5466), //rgba(31,84,102,255)
-                  Color(0xFF2D958E), // rgba(45,149,142,255)
+                  Color(0xFF2D958E),
                 ],
                 begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
+                end: Alignment.bottomRight, // rgba(45,149,142,255)])
               ),
             ),
-            child: ListView(
+
+            child: Column(
               children: [
-                Column(
-                  children: [
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                    ),
-                    SizedBox(
-                      width: double.infinity,
-                      height: 370,
-                      child: Card(
-                        margin: const EdgeInsets.fromLTRB(30, 0, 50, 0),
-                        color: Colors.white,
-                        shape: const RoundedRectangleBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(5.0),
-                          ),
-                        ),
-                        child: ListView(
-                          children: [
-                            Column(
-                              children: [
-                                Container(
-                                  width: double.infinity,
-                                  margin: const EdgeInsets.symmetric(
-                                    horizontal: 15.0,
-                                    vertical: 10.0,
-                                  ),
-                                  child: Form(
-                                    child: TextFormField(
-                                      controller: textController,
-                                      //onChanged: store.setInformation,
-                                      textAlign: TextAlign.center,
-                                      decoration: InputDecoration(
-                                        hintText: 'Texto Digitado 1',
-                                        hintStyle: const TextStyle(
-                                          color: Colors.black87,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                        contentPadding:
-                                            const EdgeInsets.symmetric(
-                                          horizontal: 10.0,
-                                          vertical: 10.0,
-                                        ),
-                                        suffixIcon: Row(
-                                          mainAxisSize: MainAxisSize.min,
-                                          children: [
-                                            InkWell(
-                                              onTap: () {
-                                                print("called edit");
-                                              },
-                                              child: const Icon(
-                                                Icons.edit,
-                                                size: 35,
-                                              ),
-                                            ),
-                                            const SizedBox(width: 8.0),
-                                            InkWell(
-                                              onTap: () {
-                                                print('called delete');
-                                              },
-                                              child: const CircleAvatar(
-                                                backgroundColor: Colors.red,
-                                                radius: 15.0,
-                                                child: Icon(
-                                                  Icons.close,
-                                                  color: Colors.white,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                        enabledBorder: const UnderlineInputBorder(
-                                          borderSide: BorderSide(
-                                            color: Color(0xFFDCDCDC),
-                                          ),
-                                        ),
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 70,
-                    ),
-                    Observer(builder: (_) {
+                Expanded(
+                  child: Container(
+                    margin: EdgeInsets.fromLTRB(30, 30, 50, 40),
+                    color: Colors.white,
+                    child: Observer(builder: (context) {
                       return SizedBox(
-                        width: double.infinity,
-                        height: 50,
-                        child: Container(
-                          margin: const EdgeInsets.fromLTRB(30, 0, 50, 0),
-                          child: Form(
-                            child: TextFormField(
-                              controller: textController,
-                              onFieldSubmitted: store.setInformation,
-                              focusNode: focus,
-                              textAlign: TextAlign.center,
-                              decoration: InputDecoration(
-                                hintText: 'Digite seu texto',
-                                hintStyle: const TextStyle(
-                                    color: Colors.black87,
-                                    fontWeight: FontWeight.bold),
-                                contentPadding:
-                                    const EdgeInsets.symmetric(horizontal: 10.0),
-                                fillColor: Colors.white,
-                                filled: true,
-                                enabledBorder: OutlineInputBorder(
-                                  borderRadius: BorderRadius.circular(10.0),
-                                  borderSide: const BorderSide(
-                                    color: Colors.white,
-                                    width: 1.0,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
+                        height: 350,
+                        child: ListView.builder(
+                            shrinkWrap: true,
+                            physics: ClampingScrollPhysics(),
+                            itemCount: store.items.length,
+                            itemBuilder: (context, index) {
+                              return CardItem(
+                                text: store.items[index],
+                                onDelete: () => showDeleteConfirmDialog(index),
+                                onUpdate: () => showEditConfirmDialog(
+                                    index, store.items[index]),
+                              );
+                            }),
                       );
                     }),
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 50,
-                    ),
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 40,
-                      child: Center(
-                        child: Text(
-                          'Política de Privacidade',
-                          style: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.fromLTRB(30, 0, 50, 0),
+                  child: TextFormField(
+                    controller: textController1,
+                    focusNode: focus,
+                    textAlign: TextAlign.center,
+                    decoration: InputDecoration(
+                      fillColor: Colors.white,
+                      filled: true,
+                      contentPadding:
+                          const EdgeInsets.symmetric(horizontal: 10.0),
+                      enabledBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(10.0),
+                        borderSide:
+                            const BorderSide(color: Colors.white, width: 1.0),
+                      ),
+                      hintText: 'Digite seu texto',
+                      hintStyle: const TextStyle(
+                        color: Colors.black87,
+                        fontWeight: FontWeight.bold,
                       ),
                     ),
-                    const SizedBox(
-                      width: double.infinity,
-                      height: 20,
+                    onFieldSubmitted: (text) {
+                      if (text.isNotEmpty) {
+                        store.addCard(text);
+                        textController1.clear();
+                      }
+                    },
+                  ),
+                ),
+                const SizedBox(
+                  width: double.infinity,
+                  height: 90,
+                ),
+                const SizedBox(
+                  width: double.infinity,
+                  height: 40,
+                  child: Center(
+                    child: Text(
+                      'Política de Privacidade',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
                     ),
-                  ],
+                  ),
+                ),
+                const SizedBox(
+                  width: double.infinity,
+                  height: 20,
                 ),
               ],
             ),
-          ),
+          ), //Geral
         ),
       ),
+    );
+  }
+} //class
+
+
+class CardItem extends StatelessWidget {
+  const CardItem(
+      {required this.text, required this.onDelete, required this.onUpdate});
+
+  final String text;
+  final VoidCallback onDelete;
+  final VoidCallback onUpdate;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Card(
+          color: Colors.white,
+          margin: const EdgeInsets.symmetric(vertical: 8),
+          child: Container(
+            color: Colors.transparent,
+            child: ListTile(
+              tileColor: Colors.transparent,
+              title: Center(
+                child: Text(
+                  '$text',
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
+              trailing: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  InkWell(
+                    onTap: () {
+                      onUpdate();
+                    },
+                    child: const Icon(
+                      Icons.edit,
+                      size: 35,
+                    ),
+                  ),
+                  const SizedBox(width: 8.0),
+                  InkWell(
+                    onTap: () {
+                      onDelete();
+                    },
+                    child: const CircleAvatar(
+                      backgroundColor: Colors.red,
+                      radius: 15.0,
+                      child: Icon(
+                        Icons.close,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
@@ -197,5 +240,4 @@ Future<void> urlLink(String url) async {
       ? await launchUrlString(url)
       : throw "It is now allowed to open $url";
 }
-
 

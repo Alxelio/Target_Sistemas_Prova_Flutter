@@ -18,7 +18,6 @@ class MessageDialog {
     );
     return;
   }
-
 }
 
 
