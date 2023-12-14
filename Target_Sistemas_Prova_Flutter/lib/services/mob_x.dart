@@ -9,23 +9,41 @@ abstract class _NextScreenStore with Store{
   @observable
   ObservableList<String> items = ObservableList<String>();
 
+  _NextScreenStore(){
+    loadItemsSharedPreferences();
+    autorun((_) => saveItemsSharedPreferences(),);
+  }
+
   @action
   void addCard(String text){
     items.add(text);
+    saveItemsSharedPreferences();
   }
 
   @action
   void removeCard(int index){
     items.removeAt(index);
+    saveItemsSharedPreferences();
   }
 
   @action
   void updateCard(int index, String textController1){
     if(textController1.isNotEmpty){
       items[index] = textController1;
+      saveItemsSharedPreferences();
     }
   }
 
+  @action
+  Future<void> loadItemsSharedPreferences() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    items = ObservableList<String>.of(prefs.getStringList('items') ?? []);
+  }
+
+  @action
+  Future<void> saveItemsSharedPreferences() async{
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    await prefs.setStringList('items', items.toList(),);
+  }
+
 }
-
-

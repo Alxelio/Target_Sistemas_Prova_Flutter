@@ -15,6 +15,12 @@ class _NextScreenState extends State<NextScreen> {
   final TextEditingController textController1 = TextEditingController();
   final FocusNode focus = FocusNode();
 
+  @override
+  void initState(){
+    super.initState();
+    store.loadItemsSharedPreferences();
+  }
+
   Future<void> showEditConfirmDialog(index, text) async {
     return showDialog(
         context: context,
@@ -93,14 +99,14 @@ class _NextScreenState extends State<NextScreen> {
               children: [
                 Expanded(
                   child: Container(
-                    margin: EdgeInsets.fromLTRB(30, 30, 50, 40),
+                    margin: const EdgeInsets.fromLTRB(30, 30, 50, 40),
                     color: Colors.white,
                     child: Observer(builder: (context) {
                       return SizedBox(
                         height: 350,
                         child: ListView.builder(
                             shrinkWrap: true,
-                            physics: ClampingScrollPhysics(),
+                            physics: const ClampingScrollPhysics(),
                             itemCount: store.items.length,
                             itemBuilder: (context, index) {
                               return CardItem(
@@ -115,7 +121,7 @@ class _NextScreenState extends State<NextScreen> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.fromLTRB(30, 0, 50, 0),
+                  margin: const EdgeInsets.fromLTRB(30, 0, 50, 0),
                   child: TextFormField(
                     controller: textController1,
                     focusNode: focus,
@@ -195,8 +201,8 @@ class CardItem extends StatelessWidget {
               tileColor: Colors.transparent,
               title: Center(
                 child: Text(
-                  '$text',
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  text,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
                 ),
               ),
               trailing: Row(
