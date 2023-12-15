@@ -36,14 +36,23 @@ abstract class _NextScreenStore with Store{
 
   @action
   Future<void> loadItemsSharedPreferences() async {
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    items = ObservableList<String>.of(prefs.getStringList('items') ?? []);
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      items = ObservableList<String>.of(prefs.getStringList('items') ?? []);
+    } catch (e) {
+      print("Mensagem de log de não carregamento concluído $e");
+    }
   }
 
   @action
   Future<void> saveItemsSharedPreferences() async{
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    await prefs.setStringList('items', items.toList(),);
+    try{
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setStringList('items', items.toList(),);
+    }
+    catch (e) {
+      print("Mensagem de log de não salvamento concluído $e");
+    }
   }
 
 }

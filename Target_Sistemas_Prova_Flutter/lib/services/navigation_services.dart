@@ -18,7 +18,7 @@ class _NextScreenState extends State<NextScreen> {
   @override
   void initState(){
     super.initState();
-    store.loadItemsSharedPreferences();
+    store.loadItemsSharedPreferences();  print("Mensagem de log carregando");
   }
 
   Future<void> showEditConfirmDialog(index, text) async {
