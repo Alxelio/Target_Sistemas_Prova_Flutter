@@ -162,3 +162,25 @@ dependencies:
 ### Improve README.md with Markdown Language
 
 I revised of my README.md file just for having more readability and a clean view of it. Making the presentation better for queries and so on.
+
+I put this command at the beginning of this file.md only to charge all the pictures or images by Markdown Language. Its goal is showing to the people what I was requested for!
+
+```bash
+![ Prova com suas Regras de Negócio](assets/images/prova_flutter1.png "This is a image of the proof - screen 1")
+![ Prova com suas Regras de Negócio](assets/images/prova_flutter2.png "This is a image of the proof - screen 2")
+![ Prova com suas Regras de Negócio](assets/images/prova_flutter3.png "This is a image of the proof - screen 3")
+![ Prova com suas Regras de Negócio](assets/images/prova_flutter4.png "This is a image of the proof - screen 4")
+```
+
+I made both directories as well, called assets for the first one, and images for the last one just to load the pictures or images for this application.
+I put these .png files inside those directories.
+And then, I updated the **pubspec.yaml** file to receive this pictures or images correctly with this code below.
+
+```YAML
+  assets:
+    - assets/images/prova_flutter1.png
+    - assets/images/prova_flutter2.png
+    - assets/images/prova_flutter3.png
+    - assets/images/prova_flutter4.png
+```
+
