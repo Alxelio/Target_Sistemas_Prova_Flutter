@@ -184,3 +184,79 @@ And then, I updated the **pubspec.yaml** file to receive this pictures or images
     - assets/images/prova_flutter4.png
 ```
 
+### Correcting All Tests
+
+I found some troubles when I tried to do some testing because the showDialog() Widget must have a Context, so in other words, I am obligated to pass some context when it is called!
+See the implementation below to clarify what I am talking about!
+
+```bash
+class MessageDialog {
+
+  void displayMessage(```dart 'BuildContext context' ```, String message){
+    showDialog(```dart 'context: context' ```, builder: (content) => AlertDialog(
+      title: const Text("Erro de validação!"),
+      content: Text(message),
+      actions: [
+        TextButton(
+          onPressed: (){
+            Navigator.pop(context);
+          },
+          child: const Text("Entendido"),
+        ),
+      ],
+    ),
+    );
+    return;
+  }
+}
+```
+As the test file or when We do some testing there isn't any **Context**, therefore I had to do a simulation for returning some Widget as a Context. 
+Here it is the code snippet as an example only: 
+
+```bash
+testWidgets(
+    'It should return an error message if it has empty spaces at the end of user field!',
+    (WidgetTester tester) async {
+
+      TextEditingController userController = TextEditingController(text: 'Target ');
+      TextEditingController passwordController = TextEditingController(text: 'Sistemas ');
+      String message = 'O campo usuário não pode terminar com espaços vazios ! Retirei os espaços vazios do final. Aperte Enter novamente por favor.';
+
+      await tester.pumpWidget(
+        MaterialApp(
+          home: Builder(
+            builder: (BuildContext context){
+              return SizedBox();
+            },
+          ),
+        ),
+      );
+
+      BuildContext testContext = tester.element(find.byType(SizedBox),);
+
+      await tester.runAsync(() async {
+        userFieldEndsEmpty( testContext, userController, passwordController, message);
+        await tester.pump();
+        await tester.pump(const Duration(seconds: 3),);
+      }
+      );
+
+      expect(
+          userController.text,
+          equals(
+              'Target '
+          ),
+      );
+    });
+```
+
+So I had to use some functions like; 
+    **tester.pumpWidget()** to wait the widget be build.
+    **tester.element(find.byType(SizedBox),);** to find the widget in an specific type and then return an **object BuildContext** related to this widget.
+    BuildContext usually is needed to show some dialogs as we want in this case and navigating to other pages as well.
+    **tester.runAsync(() async {});** to wait all operations have been done. We usually use it with Future.delayed(Duration(seconds: 1)); for instance.
+
+For running the tests I should type in the terminal this command below:
+```bash
+    flutter test test/services/validation_services_test.dart
+```

@@ -6,7 +6,6 @@ void main() {
   Credentials credentials = Credentials(
     TextEditingController(),
     TextEditingController(),
-    "",
   );
 
   runApp(
