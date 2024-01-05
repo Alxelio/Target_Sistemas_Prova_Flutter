@@ -1,14 +1,8 @@
 class MockAPI {
-  static Future<bool> validate_Credentials(String user, String password) async {
-    await Future.delayed(
-      Duration(milliseconds: 300),
-    );
-
+  static bool validate_Credentials(String user, String password) {
     if (user == "Target" && password == "Sistemas")
       return true;
     else
       return false;
   }
 }
-
-
