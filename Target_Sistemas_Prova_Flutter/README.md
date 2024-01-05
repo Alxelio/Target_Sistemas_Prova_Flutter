@@ -6,6 +6,10 @@ I had applied for a job at **Target Sistemas Company** and then I was requested 
 ![ Prova com suas Regras de Negócio](assets/images/prova_flutter3.png "This is a image of the proof - screen 3")
 ![ Prova com suas Regras de Negócio](assets/images/prova_flutter4.png "This is a image of the proof - screen 4")
 
+### Dependencies
+
+- flutter: 3.5.6
+
 ### Signature and Configuration
 
 First of all, I created my Flutter project for some application platforms, like android, ios and web, and also having my signature with this command below.
